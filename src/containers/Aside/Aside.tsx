@@ -1,4 +1,4 @@
-import FilterCard from '../../componenets/FilterCard'
+import FilterCard from '../../componenets/FilterCard/FilterCard'
 import * as Style from './styles'
 
 const Aside = () => (

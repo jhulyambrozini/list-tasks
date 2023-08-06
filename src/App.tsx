@@ -1,5 +1,5 @@
 import Aside from './containers/Aside/Aside'
-import Main from './containers/Main/Main'
+import ListTasks from './containers/ListTasks/ListTasks'
 import GlobalStyle, { Container } from './styles'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
       <GlobalStyle />
       <Container>
         <Aside />
-        <Main />
+        <ListTasks />
       </Container>
     </>
   )
