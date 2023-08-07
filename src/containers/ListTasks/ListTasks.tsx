@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux'
 import Task from '../../componenets/Task/Task'
-import { Container } from './styles'
 
 import { RootReducer } from '../../store'
+import { MainContainer, Title } from '../../styles'
+
 const ListTasks = () => {
   const { itens } = useSelector((state: RootReducer) => state.tasks)
   const { term, critery, value } = useSelector(
@@ -27,16 +28,21 @@ const ListTasks = () => {
     }
   }
 
+  const displayFilterResult = (qntd: number) => {
+    let message = ''
+    const complement =
+      term !== undefined && term.length > 0 ? `e "${term}"` : ''
+    if (critery === 'todas') {
+      message = `${qntd} tarefa(s) encontrada(s) com: todas ${complement}`
+    } else {
+      message = `${qntd} tarefa(s) encontrada(s) com: "${`${critery} = ${value}`}" ${complement}`
+    }
+    return message
+  }
+
   return (
-    <Container>
-      <p>
-        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{term}&ldquo;
-      </p>
-      <ul>
-        <li>{term}</li>
-        <li>{critery}</li>
-        <li>{value}</li>
-      </ul>
+    <MainContainer>
+      <Title as="p">{displayFilterResult(filterTasks().length)}</Title>
       <ul>
         {filterTasks().map((t) => (
           <li key={t.id}>
@@ -50,7 +56,7 @@ const ListTasks = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </MainContainer>
   )
 }
 

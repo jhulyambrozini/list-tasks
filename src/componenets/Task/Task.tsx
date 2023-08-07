@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as Style from './styles'
-import { remove, edit } from '../../store/reducers/tasks'
+import { remove, edit, changeStatus } from '../../store/reducers/tasks'
 
 import TaskClass from '../../models/Task'
+import { Button, ButtonSalve } from '../../styles'
+import * as enums from '../../utils/enums/Tasks'
 
 type Props = TaskClass
 
@@ -22,9 +24,25 @@ const Task = ({ title, priority, status, desc, id }: Props) => {
     setIsEditing(false)
     setDesc(desc)
   }
+
+  const changeStatusTask = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeStatus({ id, isFinished: e.target.checked }))
+  }
   return (
     <Style.Card>
-      <Style.Title>{title}</Style.Title>
+      <label htmlFor={title}>
+        <input
+          type="checkbox"
+          id={title}
+          checked={status === enums.Status.CONCLUIDA}
+          onChange={changeStatusTask}
+        />
+        <Style.Title>
+          {' '}
+          {isEditing && <em>Editando: </em>}
+          {title}
+        </Style.Title>
+      </label>
       <Style.Tag parameters="priority" priority={priority}>
         {priority}
       </Style.Tag>
@@ -39,23 +57,21 @@ const Task = ({ title, priority, status, desc, id }: Props) => {
       <Style.ActionsBar>
         {isEditing ? (
           <>
-            <Style.ButtonSalve
+            <ButtonSalve
               onClick={() => {
                 dispatch(edit({ desc, priority, status, title, id }))
                 setIsEditing(false)
               }}
             >
               Salvar
-            </Style.ButtonSalve>
+            </ButtonSalve>
             <Style.ButtonCancelRemove onClick={cancelEdition}>
               Cancelar
             </Style.ButtonCancelRemove>
           </>
         ) : (
           <>
-            <Style.Button onClick={() => setIsEditing(true)}>
-              Editar
-            </Style.Button>
+            <Button onClick={() => setIsEditing(true)}>Editar</Button>
             <Style.ButtonCancelRemove onClick={() => dispatch(remove(id))}>
               Remover
             </Style.ButtonCancelRemove>
