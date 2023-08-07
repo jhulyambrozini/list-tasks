@@ -3,6 +3,7 @@ import FilterCard from '../../componenets/FilterCard/FilterCard'
 import * as Style from './styles'
 import { RootReducer } from '../../store'
 import { changeTerm } from '../../store/reducers/filter'
+import * as enums from '../../utils/enums/Tasks'
 
 const Aside = () => {
   const dispatch = useDispatch()
@@ -18,12 +19,32 @@ const Aside = () => {
           onChange={(e) => dispatch(changeTerm(e.target.value))}
         />
         <Style.Filters>
-          <FilterCard caption="pendentes" count={2} />
-          <FilterCard caption="concluídas" count={2} />
-          <FilterCard caption="urgentes" count={2} />
-          <FilterCard caption="importantes" count={2} />
-          <FilterCard caption="normal" count={2} />
-          <FilterCard caption="todas" count={2} active />
+          <FilterCard
+            value={enums.Status.PENDENTE}
+            critery="status"
+            caption="pendentes"
+          />
+          <FilterCard
+            value={enums.Status.CONCLUIDA}
+            critery="status"
+            caption="concluídas"
+          />
+          <FilterCard
+            value={enums.Priority.URGENTE}
+            critery="prioridade"
+            caption="urgentes"
+          />
+          <FilterCard
+            value={enums.Priority.IMPORTANTE}
+            critery="prioridade"
+            caption="importantes"
+          />
+          <FilterCard
+            value={enums.Priority.NORMAL}
+            critery="prioridade"
+            caption="normal"
+          />
+          <FilterCard critery="todas" caption="todas" />
         </Style.Filters>
       </div>
     </Style.Aside>
