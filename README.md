@@ -1,5 +1,5 @@
 # App para gerenciamento de tarefas
-Este projeto foi desenvolvido em conjunto do professor da EBAC. Ele está disponivel em: [list-tasks](https://list-tasks-three.vercel.app/)
+Este projeto foi desenvolvido durante o curso Engeniro Front End da EBAC. Ele está disponivel em: [list-tasks](https://list-tasks-three.vercel.app/)
 
 ## Tecnologias utilizadas
 - React
